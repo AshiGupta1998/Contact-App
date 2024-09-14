@@ -1,0 +1,48 @@
+<div class="container mt-4">
+  <h2>Contact List</h2>
+  <button class="btn btn-success mb-3" (click)="openContactModal()">New Contact</button>
+  <table *ngIf="contacts.length > 0" class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let contact of contacts">
+        <td>{{ contact.id }}</td>
+        <td>{{ contact.firstName }}</td>
+        <td>{{ contact.lastName }}</td>
+        <td>{{ contact.email }}</td>
+        <td>
+          <button class="btn btn-success btn-sm" (click)="openContactModal(contact)">Edit</button>
+        </td>
+        <td>
+          <button class="btn btn-danger btn-sm" (click)="deleteContact(contact.id!)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="contacts.length === 0">
+    <p class="text-center">No Data Found</p>
+  </div>
+</div>
+
+<!-- Modal for Add/Edit Contact -->
+<div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="contactModalLabel">{{ isEdit ? 'Edit' : 'Add' }} Contact</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <app-contact-form [contact]="selectedContact" (save)="onSave()"></app-contact-form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+/* Optional: Custom styles to enhance the form */
+.form-control {
+    border-radius: 0.25rem;
+}
+
+.invalid-feedback {
+    display: block;
+}

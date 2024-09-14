@@ -1,0 +1,50 @@
+/* Custom styles for the buttons */
+.btn-success {
+    background-color: #28a745;
+    /* Green color */
+    border-color: #28a745;
+    /* Green border */
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    /* Red color */
+    border-color: #dc3545;
+    /* Red border */
+}
+
+/* Optional: Add hover effects for better UX */
+.btn-success:hover {
+    background-color: #218838;
+    /* Darker green */
+    border-color: #1e7e34;
+    /* Darker green border */
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    /* Darker red */
+    border-color: #bd2130;
+    /* Darker red border */
+}
+
+/* Ensures vertical alignment and margins */
+.table td,
+.table th {
+    vertical-align: middle;
+}
+
+.btn {
+    margin-right: 5px;
+    /* Adds a small margin between buttons */
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+    /* Light grey background for odd rows */
+}
+
+.table-striped tbody tr:hover {
+    background-color: #f1f1f1;
+    /* Slightly darker background on hover */
+}
