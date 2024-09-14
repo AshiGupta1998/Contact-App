@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ContactService } from '../services/contact.service';
-import { Contact } from '../Models/contact.model';
+import { Contact } from '../models/contact.model';
 declare var bootstrap: any;
 @Component({
   selector: 'app-contact-list',
