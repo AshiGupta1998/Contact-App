@@ -36,13 +36,12 @@ export class ContactListComponent implements OnInit {
     if (contact) {
       this.selectedContact = { ...contact };
     } else {
-      // Reset form data for a new contact
       this.selectedContact = {} as Contact;
     }
 
     const modal = new bootstrap.Modal(document.getElementById('contactModal')!);
     modal.show();
-    this.cdr.detectChanges(); // Force change detection
+    this.cdr.detectChanges(); 
   }
 
   onSave(): void {
@@ -62,7 +61,7 @@ export class ContactListComponent implements OnInit {
   onModalConfirm(confirmed: boolean): void {
     if (confirmed && this.contactToDelete !== null) {
       this.contactService.deleteContact(this.contactToDelete).subscribe(() => {
-        this.loadContacts(); // Refresh the contact list
+        this.loadContacts(); 
       });
     }
     this.showModal = false;
