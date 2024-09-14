@@ -46,3 +46,6 @@
     </div>
   </div>
 </div>
+<div *ngIf="showModal">
+  <app-confirmation-modal [message]="modalMessage" (confirmed)="onModalConfirm($event)"></app-confirmation-modal>
+</div>

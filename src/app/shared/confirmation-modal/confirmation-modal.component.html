@@ -1,0 +1,8 @@
+<div class="modal-overlay" *ngIf="message">
+  <div class="modal-content">
+    <h2>Confirm</h2>
+    <p>{{ message }}</p>
+    <button (click)="onCancel()">Cancel</button>
+    <button (click)="onConfirm()">Confirm</button>
+  </div>
+</div>

@@ -1,33 +1,36 @@
 <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
   <div class="mb-3">
     <label for="firstName" class="form-label">First Name</label>
-    <input id="firstName" formControlName="firstName" type="text" class="form-control" [ngClass]="{'is-invalid': contactForm.get('firstName')?.invalid && contactForm.get('firstName')?.touched}">
+    <input id="firstName" formControlName="firstName" type="text" class="form-control"
+      [ngClass]="{'is-invalid': isFieldInvalid('firstName')}">
     <div class="invalid-feedback">
-      <div *ngIf="contactForm.get('firstName')?.errors?.required">First Name is required.</div>
+      <div *ngIf="isFieldInvalid('firstName', 'required')">First Name is required.</div>
     </div>
   </div>
 
   <div class="mb-3">
     <label for="lastName" class="form-label">Last Name</label>
-    <input id="lastName" formControlName="lastName" type="text" class="form-control" [ngClass]="{'is-invalid': contactForm.get('lastName')?.invalid && contactForm.get('lastName')?.touched}">
+    <input id="lastName" formControlName="lastName" type="text" class="form-control"
+      [ngClass]="{'is-invalid': isFieldInvalid('lastName')}">
     <div class="invalid-feedback">
-      <div *ngIf="contactForm.get('lastName')?.errors?.required">Last Name is required.</div>
+      <div *ngIf="isFieldInvalid('lastName', 'required')">Last Name is required.</div>
     </div>
   </div>
 
   <div class="mb-3">
     <label for="email" class="form-label">Email</label>
-    <input id="email" formControlName="email" type="email" class="form-control" [ngClass]="{'is-invalid': contactForm.get('email')?.invalid && contactForm.get('email')?.touched}">
+    <input id="email" formControlName="email" type="email" class="form-control"
+      [ngClass]="{'is-invalid': isFieldInvalid('email')}">
     <div class="invalid-feedback">
-      <div *ngIf="contactForm.get('email')?.errors?.required">Email is required.</div>
-      <div *ngIf="contactForm.get('email')?.errors?.email">Email must be a valid email address.</div>
+      <div *ngIf="isFieldInvalid('email', 'required')">Email is required.</div>
+      <div *ngIf="isFieldInvalid('email', 'email')">Email must be a valid email address.</div>
     </div>
   </div>
 
   <div class="d-flex gap-2">
-  <button type="submit" class="btn btn-primary">
-    {{ isEditMode ? 'Update' : 'Save' }}
-  </button>
+    <button type="submit" class="btn btn-primary">
+      {{ isEditMode ? 'Update' : 'Save' }}
+    </button>
     <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
   </div>
 </form>

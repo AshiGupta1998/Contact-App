@@ -1,4 +1,12 @@
-import { Component, Input, OnInit, Output, EventEmitter, SimpleChanges, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  Output,
+  EventEmitter,
+  SimpleChanges,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Contact } from '../Models/contact.model';
 import { ContactService } from '../services/contact.service';
@@ -13,6 +21,7 @@ export class ContactFormComponent implements OnInit {
   @Output() save = new EventEmitter<void>();
   contactForm: FormGroup;
   isEditMode: boolean = false;
+
   constructor(
     private fb: FormBuilder,
     private contactService: ContactService,
@@ -27,13 +36,15 @@ export class ContactFormComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['contact']) {
-      if (this.contact) {
+      if (this.contact && Object.keys(this.contact).length > 0) {
         this.contactForm.patchValue(this.contact);
-          this.isEditMode = true;
+        this.isEditMode = true;
       } else {
-        this.contactForm.reset(this.contact);
+        this.contactForm.reset();
+         this.isEditMode = false;
       }
       this.cdr.detectChanges();
     }
@@ -55,6 +66,15 @@ export class ContactFormComponent implements OnInit {
 
   onCancel(): void {
     this.contactForm.reset();
-    this.save.emit(); // Close the modal
+    this.save.emit(); 
+  }
+
+  isFieldInvalid(field: string, errorType?: string): boolean {
+    const control = this.contactForm.get(field);
+    return (
+      control?.invalid &&
+      (control?.touched || this.contactForm.dirty) &&
+      (!errorType || control?.errors?.[errorType])
+    );
   }
 }

@@ -12,7 +12,9 @@ export class ContactListComponent implements OnInit {
   contacts: Contact[] = [];
   selectedContact?: Contact;
   isEdit: boolean = false;
-
+  showModal: boolean = false;
+  modalMessage: string = '';
+  contactToDelete: number | null = null;
   constructor(
     private contactService: ContactService,
     private router: Router,
@@ -37,7 +39,6 @@ export class ContactListComponent implements OnInit {
       // Reset form data for a new contact
       this.selectedContact = {} as Contact;
     }
-   
 
     const modal = new bootstrap.Modal(document.getElementById('contactModal')!);
     modal.show();
@@ -53,10 +54,17 @@ export class ContactListComponent implements OnInit {
   }
 
   deleteContact(id: number): void {
-    if (confirm('Are you sure you want to delete this contact?')) {
-      this.contactService.deleteContact(id).subscribe(() => {
-        this.loadContacts();
+    this.contactToDelete = id;
+    this.modalMessage = 'Are you sure you want to delete this contact?';
+    this.showModal = true;
+  }
+
+  onModalConfirm(confirmed: boolean): void {
+    if (confirmed && this.contactToDelete !== null) {
+      this.contactService.deleteContact(this.contactToDelete).subscribe(() => {
+        this.loadContacts(); // Refresh the contact list
       });
     }
+    this.showModal = false;
   }
 }
