@@ -12,7 +12,7 @@ export class ContactFormComponent implements OnInit {
   @Input() contact?: Contact;
   @Output() save = new EventEmitter<void>();
   contactForm: FormGroup;
-
+  isEditMode: boolean = false;
   constructor(
     private fb: FormBuilder,
     private contactService: ContactService,
@@ -26,15 +26,14 @@ export class ContactFormComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['contact']) {
       if (this.contact) {
         this.contactForm.patchValue(this.contact);
-      }
-      else{
-            this.contactForm.reset(this.contact);
+          this.isEditMode = true;
+      } else {
+        this.contactForm.reset(this.contact);
       }
       this.cdr.detectChanges();
     }
